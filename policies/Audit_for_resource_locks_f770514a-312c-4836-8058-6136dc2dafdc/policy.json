@@ -1,0 +1,57 @@
+{
+ "properties": {
+  "displayName": "Audit for resource locks",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "General",
+   "createdBy": "f88fd1cf-1616-4564-8096-1b8a148dfa0b",
+   "createdOn": "2022-12-27T10:27:40.0048589Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "resourceTypes": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "resourceTypes",
+     "description": "Azure resource types to audit for any lock"
+    }
+   },
+   "lockLevel": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "lockLevel",
+     "description": "The lock level to audit for"
+    },
+    "allowedValues": [
+     "ReadOnly",
+     "CanNotDelete"
+    ],
+    "defaultValue": [
+     "ReadOnly",
+     "CanNotDelete"
+    ]
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "in": "[parameters('resourceTypes')]"
+   },
+   "then": {
+    "details": {
+     "existenceCondition": {
+      "field": "Microsoft.Authorization/locks/level",
+      "in": "[parameters('lockLevel')]"
+     },
+     "type": "Microsoft.Authorization/locks"
+    },
+    "effect": "auditIfNotExists"
+   }
+  }
+ },
+ "id": "/subscriptions/ecc79768-cef9-49b8-b89d-ae133dc826f7/providers/Microsoft.Authorization/policyDefinitions/f770514a-312c-4836-8058-6136dc2dafdc",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "f770514a-312c-4836-8058-6136dc2dafdc"
+}

@@ -1,0 +1,143 @@
+{
+ "properties": {
+  "displayName": "General Additional Initiative",
+  "policyType": "Custom",
+  "description": "General Additional Initiative",
+  "metadata": {
+   "category": "General",
+   "version": "1.0.0",
+   "parameterScopes": {
+    "listOfResourceTypesNotAllowed : Not allowed resource types_1": "/subscriptions/ecc79768-cef9-49b8-b89d-ae133dc826f7",
+    "listOfAllowedLocations : Allowed locations_1": "/subscriptions/ecc79768-cef9-49b8-b89d-ae133dc826f7",
+    "listOfResourceTypesNotAllowed : Not allowed resource types_2": "/subscriptions/ecc79768-cef9-49b8-b89d-ae133dc826f7"
+   },
+   "createdBy": "f88fd1cf-1616-4564-8096-1b8a148dfa0b",
+   "createdOn": "2022-12-27T11:05:33.3650809Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "Effect": {
+    "type": "string",
+    "metadata": {
+     "displayName": "Effect",
+     "description": "Effect of particular policy."
+    },
+    "allowedValues": [
+     "Audit",
+     "Deny",
+     "Disabled"
+    ]
+   },
+   "Locations": {
+    "type": "array",
+    "metadata": {
+     "displayName": "Locations",
+     "description": "List of locations/regions.",
+     "strongType": "location"
+    }
+   },
+   "Resource Types": {
+    "type": "array",
+    "metadata": {
+     "displayName": "Resource Types",
+     "description": "List of resource types.",
+     "strongType": "resourceTypes"
+    }
+   },
+   "Tag Names": {
+    "type": "string",
+    "metadata": {
+     "displayName": "Tag Names",
+     "description": "List of names for tags."
+    },
+    "allowedValues": [
+     "Environment",
+     "Region"
+    ]
+   },
+   "Tag Values": {
+    "type": "array",
+    "metadata": {
+     "displayName": "Tag Values",
+     "description": "List of accesptable tag values for coresponding tags."
+    },
+    "allowedValues": [
+     "Prod",
+     "Dev",
+     "Test",
+     "NEU",
+     "WEU"
+    ]
+   }
+  },
+  "policyDefinitions": [
+   {
+    "policyDefinitionReferenceId": "Require tag and value_1",
+    "policyDefinitionId": "/subscriptions/ecc79768-cef9-49b8-b89d-ae133dc826f7/providers/Microsoft.Authorization/policyDefinitions/955a20f4-dbd3-4437-9b41-cc7569eab8d5",
+    "parameters": {
+     "tagName": {
+      "value": "[parameters('Tag Names')]"
+     },
+     "tagValue": {
+      "value": "[parameters('Tag Values')]"
+     },
+     "effect": {
+      "value": "[parameters('Effect')]"
+     }
+    },
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Audit for resource locks_1",
+    "policyDefinitionId": "/subscriptions/ecc79768-cef9-49b8-b89d-ae133dc826f7/providers/Microsoft.Authorization/policyDefinitions/f770514a-312c-4836-8058-6136dc2dafdc",
+    "parameters": {
+     "resourceTypes": {
+      "value": "[parameters('Resource Types')]"
+     }
+    },
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Not allowed resource types_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6c112d4e-5bc7-47ae-a041-ea2d9dccd749",
+    "parameters": {
+     "listOfResourceTypesNotAllowed": {
+      "value": "[parameters('Resource Types')]"
+     },
+     "effect": {
+      "value": "[parameters('Effect')]"
+     }
+    },
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Allowed locations_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c",
+    "parameters": {
+     "listOfAllowedLocations": {
+      "value": "[parameters('Locations')]"
+     }
+    },
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Not allowed resource types_2",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6c112d4e-5bc7-47ae-a041-ea2d9dccd749",
+    "parameters": {
+     "listOfResourceTypesNotAllowed": {
+      "value": "[parameters('Locations')]"
+     },
+     "effect": {
+      "value": "[parameters('Effect')]"
+     }
+    },
+    "groupNames": []
+   }
+  ],
+  "policyDefinitionGroups": []
+ },
+ "id": "/subscriptions/ecc79768-cef9-49b8-b89d-ae133dc826f7/providers/Microsoft.Authorization/policySetDefinitions/268c45c35f1c415697d5d672",
+ "type": "Microsoft.Authorization/policySetDefinitions",
+ "name": "268c45c35f1c415697d5d672"
+}
